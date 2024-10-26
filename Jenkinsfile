@@ -34,6 +34,12 @@ pipeline {
                     // Copy the JAR to the deployment folder
                     bat "copy /Y \"${buildJar}\" \"${deployJar}\""
 
+                    // Check if port 1010 is already in use
+                    def isPortInUse = bat(script: 'netstat -aon | findstr :1010', returnStatus: true) == 0
+                    if (isPortInUse) {
+                        error('Port 1010 is already in use. Please free it up before deployment.')
+                    }
+
                     // Run the JAR directly from the deployment folder with the specified port
                     bat "java -jar \"${deployJar}\" --server.port=1010"
                 }
@@ -44,8 +50,8 @@ pipeline {
             steps {
                 script {
                     echo 'Running tests...'
-                    // Example verification logic (HTTP check)
-                    def response = bat(script: 'curl -s -o /dev/null -w "%{http_code}" http://localhost:2020', returnStdout: true)
+                    // Verification logic (HTTP check on the correct port)
+                    def response = bat(script: 'curl -s -o /dev/null -w "%{http_code}" http://localhost:1010', returnStdout: true)
                     if (response.trim() == '200') {
                         echo 'Application is up and running!'
                     } else {
