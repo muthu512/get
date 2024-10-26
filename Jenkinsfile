@@ -27,7 +27,7 @@ pipeline {
                     def deployFolder = "C:\\Users\\Dell-Lap\\Downloads\\Newfolder"
                     def deployJar = "${deployFolder}\\spring-boot-2-hello-world-1.0.2-SNAPSHOT.jar"
                     bat "copy /Y \"${buildJar}\" \"${deployJar}\""
-                    bat "java -jar \"${deployJar}\""
+                    bat "java -jar ${jarFile} --server.port=1010"
                 }
             }
         }
