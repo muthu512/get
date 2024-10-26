@@ -45,7 +45,7 @@ pipeline {
                 script {
                     echo 'Running tests...'
                     // Example verification logic (HTTP check)
-                    def response = bat(script: 'curl -s -o /dev/null -w "%{http_code}" http://localhost:1010', returnStdout: true)
+                    def response = bat(script: 'curl -s -o /dev/null -w "%{http_code}" http://localhost:2020', returnStdout: true)
                     if (response.trim() == '200') {
                         echo 'Application is up and running!'
                     } else {
