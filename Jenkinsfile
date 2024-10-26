@@ -21,7 +21,7 @@ pipeline {
                 script {
                     // Define the source and target paths for the JAR file
                     def jarSource = "${WORKSPACE}\\target\\spring-boot-hello-world-main.jar"
-                    def deployFolder = "C:\\Users\\Dell-Lap\\Downloads\\Newfolder"
+                    def deployFolder = "C:\\Users\\Dell-Lap\\Downloads\\Newfolder1"
                     
                     // Creating the deployment folder if it doesn't exist
                     bat "mkdir ${deployFolder}"
