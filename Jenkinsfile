@@ -19,14 +19,16 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    // Define the source and target paths for the JAR file
+                    // Define the source path for the JAR file
                     def jarSource = "${WORKSPACE}\\target\\spring-boot-hello-world-main.jar"
-                    def deployFolder = "C:\\Users\\Dell-Lap\\Downloads\\Newfolder1"
                     
-                    // Creating the deployment folder if it doesn't exist
+                    // Define a static deployment folder
+                    def deployFolder = "C:\\Users\\Dell-Lap\\Downloads\\Newfolder"
+                    
+                    // Create the deployment folder (if it doesn't already exist)
                     bat "mkdir ${deployFolder}"
                     
-                    // Copying the JAR file to the target folder
+                    // Copy the JAR file to the target folder
                     bat "copy ${jarSource} ${deployFolder}"
                     
                     // Running the Spring Boot application from the specific folder on port 1010
